@@ -5,15 +5,15 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7D35FA0F-420C-4704-ADA3-AE25CFA85C91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manager.Domain", "src\2 - Manager.Domain\Manager.Domain.csproj", "{6BAF9783-8C99-4A57-917C-80A12879D581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3 - Manager.Domain", "src\2 - Manager.Domain\3 - Manager.Domain.csproj", "{6BAF9783-8C99-4A57-917C-80A12879D581}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manager.Services", "src\3 - Manager.Services\Manager.Services.csproj", "{C5B0A2CC-C697-4C22-9739-AC286AEF00D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2 - Manager.Services", "src\3 - Manager.Services\2 - Manager.Services.csproj", "{C5B0A2CC-C697-4C22-9739-AC286AEF00D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manager.Infra", "src\4 - Manager.Infra\Manager.Infra.csproj", "{4D97CF5F-55AD-4D78-A420-BB2A41A8D61F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4 - Manager.Infra", "src\4 - Manager.Infra\4 - Manager.Infra.csproj", "{4D97CF5F-55AD-4D78-A420-BB2A41A8D61F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manager.Core", "src\5 - Manager.Core\Manager.Core.csproj", "{3E3CB580-B49D-44EB-BACF-10D99C6E1D3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5 - Manager.Core", "src\5 - Manager.Core\5 - Manager.Core.csproj", "{3E3CB580-B49D-44EB-BACF-10D99C6E1D3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagerAPI", "src\1 - ManagerAPI\ManagerAPI.csproj", "{F12C5B38-33CE-4F4D-94BA-834488101D42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1 - ManagerAPI", "src\1 - ManagerAPI\1 - ManagerAPI.csproj", "{F12C5B38-33CE-4F4D-94BA-834488101D42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
