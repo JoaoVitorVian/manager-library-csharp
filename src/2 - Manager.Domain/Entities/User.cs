@@ -7,13 +7,13 @@ namespace Manager.Domain.Entities
 {
     public class User : Base
     {
-    //private set para deixar a entidade fechada, é possivel mudar a entidade através de metodos
-    //para deixar a entidade protegida a erros de insercao.
+        //private set para deixar a entidade fechada, é possivel mudar a entidade através de metodos
+        //para deixar a entidade protegida a erros de insercao.
         public string Name { get; private set; }
 
         public string Email { get; private set; }
 
-        public string Password { get; private set; }
+        public string Password { get; set; }
 
         protected User(){}
 

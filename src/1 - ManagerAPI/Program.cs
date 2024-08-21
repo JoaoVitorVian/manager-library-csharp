@@ -1,28 +1,31 @@
+using AutoMapper;
+using Manager.Domain.Entities;
+using Manager.Infra.Context;
 using Manager.Infra.Interfaces;
 using Manager.Infra.Repositories;
-using Manager.Services.Services;
-using Manager.Services.Interfaces;
-using AutoMapper;
 using Manager.Services.DTO;
-using Manager.Domain.Entities;
+using Manager.Services.Interfaces;
+using Manager.Services.Services;
 using ManagerAPI.ViewModels;
+using ManagerAPI.ViewModels.User;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Manager.Infra.Context;
-using System.Collections.Generic;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #region AutoMapperConfig
 
 #region DependencyInjection
-builder.Services.AddDbContext<ManagerContext>(options =>options.UseSqlServer("Data Source=DESKTOP-LJU8U6L\\SQLEXPRESS;Initial Catalog=USERMANAGERAPI;Integrated Security=True;TrustServerCertificate=True"),ServiceLifetime.Transient);
+var connectionString = builder.Configuration.GetConnectionString("USER_MANAGER");
+
+builder.Services.AddDbContext<ManagerContext>(options =>
+    options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -33,12 +36,40 @@ builder.Services.AddScoped<ILibraryRepository, LibraryRepository>();
 var autoMapperConfig = new MapperConfiguration(cfg =>{
     cfg.CreateMap<User, UserDTO>().ReverseMap();
     cfg.CreateMap<CreateUserViewModel, UserDTO>().ReverseMap();
+    cfg.CreateMap<UpdateUserViewModel, UserDTO>().ReverseMap();
+    cfg.CreateMap<LoginUserViewModel, UserDTO>().ReverseMap();
 
     cfg.CreateMap<Library, LibraryDTO>().ReverseMap();
     cfg.CreateMap<CreateLibraryViewModel, LibraryDTO>().ReverseMap();
+    cfg.CreateMap<UpdateLibraryViewModel, LibraryDTO>().ReverseMap();
 });	
 
 builder.Services.AddSingleton(autoMapperConfig.CreateMapper());
+#endregion
+
+#region Authentication
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var key = jwtSettings["SecretKey"];
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["ValidIssuer"],
+        ValidAudience = jwtSettings["ValidAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+    };
+});
+
 #endregion
 
 var app = builder.Build();

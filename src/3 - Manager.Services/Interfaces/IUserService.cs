@@ -23,5 +23,7 @@ namespace Manager.Services.Interfaces
         Task<List<UserDTO>> SearchByEmail( string email);
         
         Task<UserDTO> GetByEmail(string email);
+
+        Task<string> AuthenticateAsync(string email, string password);
     }
 }

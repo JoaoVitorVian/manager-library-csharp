@@ -1,15 +1,11 @@
 using AutoMapper;
-using Manager.Infra.Interfaces;
-using Manager.Services.DTO;
 using Manager.Core.Exceptions;
 using Manager.Domain.Entities;
+using Manager.Infra.Interfaces;
+using Manager.Services.DTO;
 using Manager.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace  Manager.Services.Services
+namespace Manager.Services.Services
 {
     public class LibraryService : ILibraryService
     {
@@ -75,6 +71,7 @@ namespace  Manager.Services.Services
 
             return _mapper.Map<LibraryDTO>(bookCreated);
         }
+
         public async Task Remove(long id){
             await _repository.Remove(id);
         }
