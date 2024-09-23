@@ -29,7 +29,7 @@
         return obj;
       }
 
-       public virtual async Task Remove(long id){
+       public virtual async Task Remove(Guid id){
         var obj = await Get(id);
 
         if(obj != null){
@@ -38,7 +38,7 @@
         }
       }
 
-      public virtual async Task<T> Get(long id){
+      public virtual async Task<T> Get(Guid id){
         var obj = await _context.Set<T>()
                                 .AsNoTracking()
                                 .Where(x =>x.Id == id)

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Manager.Services.DTO;
 
 namespace Manager.Services.Interfaces
@@ -12,9 +8,9 @@ namespace Manager.Services.Interfaces
 
         Task<LibraryDTO> Update(LibraryDTO libraryDTO);
 
-        Task Remove(long id);
+        Task Remove(Guid id);
 
-        Task<LibraryDTO> Get(long id);
+        Task<LibraryDTO> Get(Guid id);
 
         Task<List<LibraryDTO>> GetAll();
 

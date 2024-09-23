@@ -1,6 +1,5 @@
 using AutoMapper;
 using Manager.Core.Exceptions;
-using Manager.Domain.Entities;
 using Manager.Infra.Interfaces;
 using Manager.Services.DTO;
 using Manager.Services.Interfaces;
@@ -44,8 +43,9 @@ namespace Manager.Services.Services
 
         public async Task<UserDTO> Update(UserDTO userDTO){
             var userExists = await _userRepository.Get(userDTO.Id);
-           
-            if(userExists != null){
+
+            if (userExists != null && userExists.Id != userDTO.Id)
+            {
                 throw new DomainExceptions("Já existe um usuário cadastrado com esse email");
             }
 
@@ -57,11 +57,11 @@ namespace Manager.Services.Services
             return _mapper.Map<UserDTO>(userCreated);
         }
 
-        public async Task Remove(long id){
+        public async Task Remove(Guid id){
             await _userRepository.Remove(id);
         }
 
-        public async Task<UserDTO> Get(long id){
+        public async Task<UserDTO> Get(Guid id){
             var user = await _userRepository.Get(id);
 
             return _mapper.Map<UserDTO>(user);

@@ -7,7 +7,7 @@ namespace  Manager.Services.DTO
 {
     public class LibraryDTO
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
         
         public string NameBook { get; set; }
 

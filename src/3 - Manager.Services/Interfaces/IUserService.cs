@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Manager.Services.DTO;
 
 namespace Manager.Services.Interfaces
@@ -12,9 +8,9 @@ namespace Manager.Services.Interfaces
 
         Task<UserDTO> Update(UserDTO userDTO);
 
-        Task Remove(long id);
+        Task Remove(Guid id);
 
-        Task<UserDTO> Get(long id);
+        Task<UserDTO> Get(Guid id);
 
         Task<List<UserDTO>> GetAll();
 

@@ -13,32 +13,30 @@ namespace Manager.Infra.Repositories
     {
         private readonly ManagerContext _context;
 
-    public LibraryRepository(ManagerContext context) : base(context)
-    {
-      _context = context;
-    }
+        public LibraryRepository(ManagerContext context) : base(context)
+        {
+          _context = context;
+        }
 
-    public async Task<List<Library>> SearchByBooks(string books)
-    {
+        public async Task<List<Library>> SearchByBooks(string books)
+        {
+                var allBooks = await _context.Librarys
+                                             .Where(
+                                              x => x.BookName.ToLower().Contains(books.ToLower()))
+                                             .AsNoTracking()
+                                             .ToListAsync();
+                                     
+                return allBooks;
+        }
+
+        public async Task<List<Library>> SearchBySerial(long serial)
+        {
             var allBooks = await _context.Librarys
-                                         .Where(
-                                          x => x.NameBook.ToLower().Contains(books.ToLower())
-                                         )
+                                         .Where(x => x.BookCodeSerial == serial)
                                          .AsNoTracking()
                                          .ToListAsync();
-                                     
-            return allBooks;
-    }
-
-    public async Task<List<Library>> SearchBySerial(long serial)
-    {
-        var allBooks = await _context.Librarys
-                                     .Where(x => x.CodeSerial == serial)
-                                     .AsNoTracking()
-                                     .ToListAsync();
                                         
-        return allBooks;
-    }   
-
-  }
+            return allBooks;
+        }
+    }
 }

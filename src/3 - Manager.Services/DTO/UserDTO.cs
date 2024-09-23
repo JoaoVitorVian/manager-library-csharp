@@ -7,7 +7,7 @@ namespace Manager.Services.DTO
 {
     public class UserDTO
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
@@ -18,7 +18,7 @@ namespace Manager.Services.DTO
         public UserDTO()
         {  }
 
-        public UserDTO(long id, string name, string email, string password)
+        public UserDTO(Guid id, string name, string email, string password)
         {
             Id = id;
             Name = name;

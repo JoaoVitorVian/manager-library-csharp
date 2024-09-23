@@ -1,44 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Manager.Core.Exceptions;
+using Manager.Domain.Entities;
 using Manager.Domain.Validators;
-using Manager.Core.Exceptions;
 
-namespace Manager.Domain.Entities
+public class Library : Base
 {
-    public class Library : Base
+    public string BookName { get; set; }
+    public string BookImg { get; set; }
+    public long BookCodeSerial { get; set; }
+    public long BookStockQuantity { get; set; }
+    public decimal BookPrice { get; set; }
+    public bool BookExists { get; set; }
+    public bool BookRead { get; set; }
+
+    public ICollection<User> Users { get; private set; }
+
+    protected Library()
     {
-        //private set para deixar a entidade fechada, é possivel mudar a entidade através de metodos
-        //para deixar a entidade protegida a erros de insercao.
-        public string NameBook { get; set; }
+        Users = new List<User>();
+    }
 
-        public long CodeSerial { get; set; }
+    public Library(string bookName, string bookImg, long bookCodeSerial, long bookStockQuantity, decimal bookPrice, bool bookExists, bool bookRead)
+    {
+        BookName = bookName;
+        BookImg = bookImg;
+        BookCodeSerial = bookCodeSerial;
+        BookStockQuantity = bookStockQuantity;
+        BookPrice = bookPrice;
+        BookExists = bookExists;
+        BookRead = bookRead;
+        Users = new List<User>();
+        _errors = new List<string>();
+    }
 
-        public bool BkExists { get; set; }
+    public override bool Validate()
+    {
+        var validator = new LibraryValidator();
+        var validation = validator.Validate(this);
 
-        protected Library() { }
-
-        public Library(string nameBook, long codeSerial, bool bkExists)
+        if (!validation.IsValid)
         {
-            NameBook = nameBook;
-            CodeSerial = codeSerial;
-            BkExists = bkExists;
-            _errors = new List<string>();
+            foreach (var error in validation.Errors)
+                _errors.Add(error.ErrorMessage);
+
+            throw new DomainExceptions("Alguns campos estão invalidos, corrija-os", _errors);
         }
-
-
-        public override bool Validate()
-        {
-            var validator = new LibraryValidator();
-            var validation = validator.Validate(this);
-
-            if (!validation.IsValid)
-            {
-                foreach (var error in validation.Errors)
-                    _errors.Add(error.ErrorMessage);
-
-                throw new DomainExceptions("Alguns campos estão invalidos, corrija-os", _errors);
-            }
-            return true;
-        }
+        return true;
     }
 }

@@ -1,56 +1,54 @@
-using System;
-using System.Collections.Generic;
-using Manager.Domain.Validators;
 using Manager.Core.Exceptions;
+using Manager.Domain.Entities;
+using Manager.Domain.Validators;
 
-namespace Manager.Domain.Entities
+public class User : Base
 {
-    public class User : Base
+    public string Name { get; private set; }
+    public string Email { get; private set; }
+    public string Password { get; set; }
+
+    public ICollection<Library> Books { get; private set; }
+    public ICollection<Loan> Loans { get; private set; }
+
+    protected User()
     {
-        //private set para deixar a entidade fechada, é possivel mudar a entidade através de metodos
-        //para deixar a entidade protegida a erros de insercao.
-        public string Name { get; private set; }
+        Books = new List<Library>();
+        Loans = new List<Loan>();
+    }
 
-        public string Email { get; private set; }
+    public User(string name, string email, string password)
+    {
+        Name = name;
+        Email = email;
+        Password = password;
+        Books = new List<Library>();
+        Loans = new List<Loan>();
+        _errors = new List<string>();
+    }
 
-        public string Password { get; set; }
+    public void AddBook(Library book)
+    {
+        Books.Add(book);
+    }
 
-        protected User(){}
+    public void RemoveBook(Library book)
+    {
+        Books.Remove(book);
+    }
 
-        public User(string name, string email, string password)
+    public override bool Validate()
+    {
+        var validator = new UserValidator();
+        var validation = validator.Validate(this);
+
+        if (!validation.IsValid)
         {
-            Name = name;
-            Email = email;
-            Password = password;
-            _errors = new List<string>();
-        }
-
-        public void ChangeName(string name){
-            Name = name;
-            Validate();
-        }
-
-        public void ChangePassword(string password){
-            Password = password;
-            Validate();
-        }
-
-         public void ChangeEmail(string email){
-            Email = email;
-            Validate();
-        }
-
-        public override bool Validate(){
-            var validator = new UserValidator();
-            var validation = validator.Validate(this);
-
-            if(!validation.IsValid){
-                foreach(var error in validation.Errors)
+            foreach (var error in validation.Errors)
                 _errors.Add(error.ErrorMessage);
 
-                throw new DomainExceptions("Alguns campos estão invalidos, corrija-os", _errors);
-            }
-            return  true;
+            throw new DomainExceptions("Alguns campos estão invalidos, corrija-os", _errors);
         }
+        return true;
     }
 }

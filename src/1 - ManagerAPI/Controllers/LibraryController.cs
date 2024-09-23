@@ -47,7 +47,7 @@ namespace ManagerAPI.Controllers
 
         [HttpGet]
         [Route("/api/v1/library/getById/{id}")]
-        public async Task<IActionResult> GetById(long id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace ManagerAPI.Controllers
         [HttpDelete]
         [Authorize]
         [Route("/api/v1/library/remove/{id}")]
-        public async Task<IActionResult> Remove(long id)
+        public async Task<IActionResult> Remove(Guid id)
         {
             try
             {

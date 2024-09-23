@@ -46,6 +46,6 @@ namespace Manager.Infra.Repositories
                                      .ToListAsync();
                                      
             return allUsers;
-        }
+          }
     }
 }

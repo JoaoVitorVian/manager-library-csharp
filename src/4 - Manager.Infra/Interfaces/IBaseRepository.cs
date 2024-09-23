@@ -10,9 +10,9 @@ namespace Manager.Infra.Interfaces
         
         Task<T> Update(T obj);
         
-        Task Remove(long id);
+        Task Remove(Guid id);
         
-        Task<T> Get(long id);
+        Task<T> Get(Guid id);
 
         Task<List<T>> GetAll();
     }
