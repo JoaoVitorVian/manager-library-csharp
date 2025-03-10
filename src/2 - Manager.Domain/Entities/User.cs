@@ -8,12 +8,12 @@ public class User : Base
     public string Email { get; private set; }
     public string Password { get; set; }
 
-    public ICollection<Library> Books { get; private set; }
+    public ICollection<Book> Books { get; private set; }
     public ICollection<Loan> Loans { get; private set; }
 
     protected User()
     {
-        Books = new List<Library>();
+        Books = new List<Book>();
         Loans = new List<Loan>();
     }
 
@@ -22,17 +22,17 @@ public class User : Base
         Name = name;
         Email = email;
         Password = password;
-        Books = new List<Library>();
+        Books = new List<Book>();
         Loans = new List<Loan>();
         _errors = new List<string>();
     }
 
-    public void AddBook(Library book)
+    public void AddBook(Book book)
     {
         Books.Add(book);
     }
 
-    public void RemoveBook(Library book)
+    public void RemoveBook(Book book)
     {
         Books.Remove(book);
     }

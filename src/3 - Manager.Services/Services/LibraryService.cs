@@ -1,6 +1,5 @@
 using AutoMapper;
 using Manager.Core.Exceptions;
-using Manager.Domain.Entities;
 using Manager.Infra.Interfaces;
 using Manager.Services.DTO;
 using Manager.Services.Interfaces;
@@ -49,7 +48,7 @@ namespace Manager.Services.Services
                  throw new DomainExceptions("Já existe um book cadastrado com esse nome");
             }
 
-            var book = _mapper.Map<Library>(libraryDTO);
+            var book = _mapper.Map<Book>(libraryDTO);
             book.Validate();
 
             var bookCreated = await _repository.Create(book);
@@ -62,10 +61,10 @@ namespace Manager.Services.Services
 
             if (bookExists != null && bookExists.Id != libraryDTO.Id)
             {
-                throw new DomainExceptions("Já existe um livro cadastrado com esse nome");
+                throw new DomainExceptions("Nenhum livro encontrado!");
             }
 
-            var book = _mapper.Map<Library>(libraryDTO);
+            var book = _mapper.Map<Book>(libraryDTO);
             book.Validate();
 
             var bookCreated = await _repository.Update(book);
@@ -76,5 +75,5 @@ namespace Manager.Services.Services
         public async Task Remove(Guid id){
             await _repository.Remove(id);
         }
-  }
+    }
 }

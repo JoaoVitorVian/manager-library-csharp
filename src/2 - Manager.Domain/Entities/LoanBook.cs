@@ -1,16 +1,16 @@
 ﻿namespace Manager.Domain.Entities
 {
-    public class LoanBooks : Base
+    public class LoanBook : Base
     {
         public Guid LoanId { get; set; }
         public Loan Loan { get; set; }
 
         public Guid BookId { get; set; } 
-        public Library Book { get; set; } 
+        public Book Book { get; set; } 
 
-        protected LoanBooks() { }
+        protected LoanBook() { }
 
-        public LoanBooks(Guid loanId, Guid bookId)
+        public LoanBook(Guid loanId, Guid bookId)
         {
             LoanId = loanId;
             BookId = bookId;

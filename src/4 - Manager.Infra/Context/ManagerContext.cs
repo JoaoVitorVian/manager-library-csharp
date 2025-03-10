@@ -15,7 +15,7 @@ namespace Manager.Infra.Context
     }
 
     public virtual DbSet<User> Users { get; set; }
-    public virtual DbSet<Library> Librarys { get; set; }
+    public virtual DbSet<Book> Librarys { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

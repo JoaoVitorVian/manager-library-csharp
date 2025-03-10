@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Manager.Domain.Validators
 {
-    public class LibraryValidator : AbstractValidator<Library>
+    public class LibraryValidator : AbstractValidator<Book>
     {
         public LibraryValidator()
         {

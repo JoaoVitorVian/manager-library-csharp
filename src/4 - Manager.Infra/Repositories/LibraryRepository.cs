@@ -9,7 +9,7 @@ using Manager.Infra.Context;
 
 namespace Manager.Infra.Repositories
 {
-    public class LibraryRepository : BaseRepository<Library>, ILibraryRepository
+    public class LibraryRepository : BaseRepository<Book>, ILibraryRepository
     {
         private readonly ManagerContext _context;
 
@@ -18,7 +18,7 @@ namespace Manager.Infra.Repositories
           _context = context;
         }
 
-        public async Task<List<Library>> SearchByBooks(string books)
+        public async Task<List<Book>> SearchByBooks(string books)
         {
                 var allBooks = await _context.Librarys
                                              .Where(
@@ -29,7 +29,7 @@ namespace Manager.Infra.Repositories
                 return allBooks;
         }
 
-        public async Task<List<Library>> SearchBySerial(long serial)
+        public async Task<List<Book>> SearchBySerial(long serial)
         {
             var allBooks = await _context.Librarys
                                          .Where(x => x.BookCodeSerial == serial)

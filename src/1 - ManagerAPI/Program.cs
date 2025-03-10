@@ -39,7 +39,7 @@ var autoMapperConfig = new MapperConfiguration(cfg =>{
     cfg.CreateMap<UpdateUserViewModel, UserDTO>().ReverseMap();
     cfg.CreateMap<LoginUserViewModel, UserDTO>().ReverseMap();
 
-    cfg.CreateMap<Library, LibraryDTO>().ReverseMap();
+    cfg.CreateMap<Book, LibraryDTO>().ReverseMap();
     cfg.CreateMap<CreateLibraryViewModel, LibraryDTO>().ReverseMap();
     cfg.CreateMap<UpdateLibraryViewModel, LibraryDTO>().ReverseMap();
 });	

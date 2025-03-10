@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Manager.Infra.Mappings
 {
-    public class LibraryMap : IEntityTypeConfiguration<Library>
+    public class LibraryMap : IEntityTypeConfiguration<Book>
     {
-        public void Configure(EntityTypeBuilder<Library> builder)
+        public void Configure(EntityTypeBuilder<Book> builder)
         {
            builder.ToTable("Library");
 
