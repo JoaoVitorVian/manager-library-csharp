@@ -22,7 +22,7 @@ namespace Manager.Infra.Repositories
         {
                 var allBooks = await _context.Librarys
                                              .Where(
-                                              x => x.BookName.ToLower().Contains(books.ToLower()))
+                                              x => x.Name.ToLower().Contains(books.ToLower()))
                                              .AsNoTracking()
                                              .ToListAsync();
                                      
@@ -32,7 +32,7 @@ namespace Manager.Infra.Repositories
         public async Task<List<Book>> SearchBySerial(long serial)
         {
             var allBooks = await _context.Librarys
-                                         .Where(x => x.BookCodeSerial == serial)
+                                         .Where(x => x.CodeSerial == serial)
                                          .AsNoTracking()
                                          .ToListAsync();
                                         

@@ -20,19 +20,19 @@ namespace Manager.Infra.Mappings
                     .UseIdentityColumn()
                     .HasColumnType("BIGINT");
 
-            builder.Property(x => x.BookName)
+            builder.Property(x => x.Name)
                     .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("nameBk")
                     .HasColumnType("VARCHAR(80)");
 
-            builder.Property(x => x.BookCodeSerial)
+            builder.Property(x => x.CodeSerial)
                     .IsRequired()
                     .HasMaxLength(10)
                     .HasColumnName("codeSerial")
                     .HasColumnType("BIGINT");
 
-            builder.Property(x => x.BookExists)
+            builder.Property(x => x.IsActive)
                     .IsRequired()
                     .HasMaxLength(180)
                     .HasColumnName("bkExists")

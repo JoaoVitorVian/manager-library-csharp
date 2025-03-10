@@ -1,5 +1,4 @@
 using AutoMapper;
-using Manager.Domain.Entities;
 using Manager.Infra.Context;
 using Manager.Infra.Interfaces;
 using Manager.Infra.Repositories;

@@ -11,11 +11,11 @@ namespace Manager.Domain.Validators
                 .NotEmpty()
                 .WithMessage("");
 
-            RuleFor(x => x.BookName)
+            RuleFor(x => x.Name)
                 .NotNull()
                 .WithMessage("Nenhum Name Book"); 
 
-            RuleFor(x => x.BookCodeSerial)
+            RuleFor(x => x.CodeSerial)
                 .NotNull()
                 .WithMessage("Nenhum Code Serial");      
         }

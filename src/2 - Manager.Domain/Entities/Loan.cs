@@ -29,7 +29,7 @@
 
         private void CalculateTotalValue()
         {
-            TotalValue = (long)Books.Sum(book => book.BookPrice);
+            TotalValue = (long)Books.Sum(book => book.Price);
         }
 
 
